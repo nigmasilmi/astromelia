@@ -1,0 +1,31 @@
+---
+import type { JSX } from "astro/jsx-runtime";
+// In Astro, <slot /> is like React's {children}.
+// Whatever content is passed between the component's tags
+// will be rendered inside <slot />.
+interface Props {
+  pageTitle: string;
+  children: JSX.Element;
+}
+const { pageTitle } = Astro.props as Props;
+---
+
+<!-- template section -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  body {
+    background-color: #dabaa3;
+  }
+</style>
