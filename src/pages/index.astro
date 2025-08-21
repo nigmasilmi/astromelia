@@ -1,4 +1,6 @@
 ---
+import UserPanel from "../components/UserPanel.astro";
+
 // scripts section or code fence section
 const pageTitle = "Astromelia";
 const headingTitle = "Astromelia Playground";
@@ -7,7 +9,6 @@ const currentUser = {
   lastName: "Doe",
   isAdmin: true,
 };
-const adminOptions = ["manage an account", "add flowers", "edit plat pots"];
 ---
 
 <!-- template section -->
@@ -21,21 +22,7 @@ const adminOptions = ["manage an account", "add flowers", "edit plat pots"];
   </head>
   <body>
     <h1>{headingTitle}</h1>
-    <h2>Welcome, {currentUser.name}!</h2>
-    <h3>What would you like to do now?</h3>
-    {
-      currentUser.isAdmin && (
-        <section class="admin-panel">
-          <h4>Admin options</h4>
-          <ul>
-            {adminOptions.map((opt) => (
-              <li>{opt}</li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-    <button id="client-script-button">Execute client script</button>
+    <UserPanel user={currentUser} />
   </body>
 </html>
 

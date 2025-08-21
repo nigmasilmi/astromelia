@@ -1,0 +1,35 @@
+---
+// `interface Props` defines the shape of properties a component can receive.
+// Use `Astro.props as Props` inside .astro files to get typed props from the parent.
+
+interface Props {
+  user: {
+    name: string;
+    lastName?: string;
+    isAdmin?: boolean;
+  };
+  userPanelTitle?: string;
+}
+// `Astro.props` gives you the props passed to this component.
+// Available only inside the frontmatter (the --- script section).
+// Use it to read values sent from the parent component/page.
+const { user, userPanelTitle = "What do you want to do today?" } =
+  Astro.props as Props;
+const adminOptions = ["manage an account", "add flowers", "edit plat pots"];
+---
+
+<h2>Welcome, {user.name}!</h2>
+<h3>{userPanelTitle}</h3>
+{
+  user.isAdmin && (
+    <section class="admin-panel">
+      <h4>Admin options</h4>
+      <ul>
+        {adminOptions.map((opt) => (
+          <li>{opt}</li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+<button id="client-script-button">Execute client script</button>
