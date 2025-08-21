@@ -66,10 +66,7 @@ const adminOptions = ["manage an account", "add flowers", "edit plat pots"];
 
 <!-- This is client-side script is different 
  from the code fence script which renders on the server side -->
-<script>
-  document
-    .querySelector("#client-script-button")
-    ?.addEventListener("click", () => {
-      console.log("I have been clicked!");
-    });
-</script>
+<script src="../scripts/index.ts"></script>
+<!-- `is:inline` tells Astro to keep the script here without moving/optimizing it. 
+`defer` tells the browser to run it after the HTML is parsed, without blocking page load. -->
+<script src="../../public/external-script.js" is:inline defer></script>
