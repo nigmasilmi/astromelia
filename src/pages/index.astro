@@ -1,17 +1,75 @@
 ---
-// scripts section
-
+// scripts section or code fence section
+const pageTitle = "Astromelia";
+const headingTitle = "Astromelia Playground";
+const currentUser = {
+  name: "Jane",
+  lastName: "Doe",
+  isAdmin: true,
+};
+const adminOptions = ["manage an account", "add flowers", "edit plat pots"];
 ---
+
 <!-- template section -->
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <h1>{headingTitle}</h1>
+    <h2>Welcome, {currentUser.name}!</h2>
+    <h3>What would you like to do now?</h3>
+    {
+      currentUser.isAdmin && (
+        <section class="admin-panel">
+          <h4>Admin options</h4>
+          <ul>
+            {adminOptions.map((opt) => (
+              <li>{opt}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    <button id="client-script-button">Execute client script</button>
+  </body>
 </html>
+
+<!-- astro's local styles -->
+<!-- to scope the styles, astro renders an attribute 
+  altogether with the class name to target the element 
+ If we need the style to be global, we use the template directive is:global
+ like so: <style is:global> 
+  -->
+<style is:global>
+  .admin-panel {
+    border: 2px solid purple;
+    padding: 1rem;
+  }
+
+  #client-script-button {
+    padding: 0.5rem;
+    color: #fff;
+    background-color: purple;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #client-script-button:hover {
+    background-color: #fff;
+    color: purple;
+  }
+</style>
+
+<!-- This is client-side script is different 
+ from the code fence script which renders on the server side -->
+<script>
+  document
+    .querySelector("#client-script-button")
+    ?.addEventListener("click", () => {
+      console.log("I have been clicked!");
+    });
+</script>
