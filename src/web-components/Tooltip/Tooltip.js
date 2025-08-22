@@ -4,14 +4,19 @@ class Tooltip extends HTMLElement {
   constructor() {
     super();
     this._tooltipContainer;
-
-    console.log("executing");
+    this._tooltipId = `tip-${Math.random().toString(36).slice(2)}`;
+    this._tooltipText = "placeholder for default";
   }
   // connectedCallback runs when the element is added to the DOM.
   // Use it to set up or render the component’s initial content.
   connectedCallback() {
+    if (this.hasAttribute("textToShow")) {
+      this._tooltipText = this.getAttribute("textToShow");
+    }
     const tooltipIcon = document.createElement("span");
+    tooltipIcon.setAttribute("aria-describedby", this.tooltipId);
     tooltipIcon.textContent = " (?) ";
+    tooltipIcon.style.cursor = "help";
     // fixing the context to the class instance
     // and not only the span which triggers the event
     tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
@@ -21,8 +26,11 @@ class Tooltip extends HTMLElement {
 
   // underscore as a convention to signal this is a "private" method
   _showTooltip() {
+    // this div is not created inside connectedCallback because that method is executed once
     this._tooltipContainer = document.createElement("div");
-    this._tooltipContainer.textContent = "this is the tooltip text";
+    this._tooltipContainer.id = this.tooltipId;
+    this._tooltipContainer.setAttribute("role", "tooltip");
+    this._tooltipContainer.textContent = this._tooltipText;
     this.appendChild(this._tooltipContainer);
   }
 
