@@ -12,6 +12,17 @@ class Tooltip extends HTMLElement {
     // const template = document.querySelector("#tooltip-tpl");
     // this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.shadowRoot.innerHTML = `
+    <style>
+      div{
+        position: absolute;
+        z-index: 1;
+        background-color: #dd8d0c;
+        color: #fff;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+      }
+    
+    </style>
     <slot></slot>
     <span>(?)</span>`;
   }
