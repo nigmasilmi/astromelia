@@ -10,6 +10,8 @@ interface Props {
     title?: string;
   };
 }
+// `Astro.props.frontmatter` comes from the frontmatter section of a .md/.mdx file.
+// It contains metadata (like title, date, tags) defined at the top of the Markdown file.
 const { pageTitle, frontmatter } = Astro.props as Props;
 ---
 

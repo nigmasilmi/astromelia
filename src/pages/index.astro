@@ -16,6 +16,7 @@ const currentUser = {
 <Layout pageTitle={pageTitle}>
   <h1>{headingTitle}</h1>
   <UserPanel user={currentUser} />
+  <astro-tooltip></astro-tooltip>
 </Layout>
 
 <!-- This is client-side script is different 
@@ -24,3 +25,4 @@ const currentUser = {
 <!-- `is:inline` tells Astro to keep the script here without moving/optimizing it. 
 `defer` tells the browser to run it after the HTML is parsed, without blocking page load. -->
 <script src="../../public/external-script.js" is:inline defer></script>
+<script src="../web-components/Tooltip/Tooltip.js"></script>
