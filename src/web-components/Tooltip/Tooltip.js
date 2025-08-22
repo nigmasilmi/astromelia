@@ -9,6 +9,8 @@ class Tooltip extends HTMLElement {
     // attaching a shadow dom tree to this wc
     // enables to access this shadow dom tree from outside this wc
     this.attachShadow({ mode: "open" });
+    const template = document.querySelector("#tooltip-tpl");
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
   // connectedCallback runs when the element is added to the DOM.
   // Use it to set up or render the component’s initial content.
@@ -16,9 +18,9 @@ class Tooltip extends HTMLElement {
     if (this.hasAttribute("textToShow")) {
       this._tooltipText = this.getAttribute("textToShow");
     }
-    const tooltipIcon = document.createElement("span");
+    const tooltipIcon = this.shadowRoot.querySelector("span");
     tooltipIcon.setAttribute("aria-describedby", this.tooltipId);
-    tooltipIcon.textContent = " (?) ";
+
     tooltipIcon.style.cursor = "help";
     // fixing the context to the class instance
     // and not only the span which triggers the event

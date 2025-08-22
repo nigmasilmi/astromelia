@@ -16,7 +16,9 @@ const currentUser = {
 <Layout pageTitle={pageTitle}>
   <h1>{headingTitle}</h1>
   <UserPanel user={currentUser} />
-  <astro-tooltip textToShow="Hello Beni"></astro-tooltip>
+  <template id="tooltip-tpl">
+    <span>(?)</span>
+  </template>
   <astro-tooltip textToShow="Some important info"></astro-tooltip>
 </Layout>
 
