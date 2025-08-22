@@ -9,8 +9,11 @@ class Tooltip extends HTMLElement {
     // attaching a shadow dom tree to this wc
     // enables to access this shadow dom tree from outside this wc
     this.attachShadow({ mode: "open" });
-    const template = document.querySelector("#tooltip-tpl");
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    // const template = document.querySelector("#tooltip-tpl");
+    // this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot.innerHTML = `
+    <slot></slot>
+    <span>(?)</span>`;
   }
   // connectedCallback runs when the element is added to the DOM.
   // Use it to set up or render the component’s initial content.

@@ -16,11 +16,6 @@ const currentUser = {
 <Layout pageTitle={pageTitle}>
   <h1>{headingTitle}</h1>
   <UserPanel user={currentUser} />
-  <template id="tooltip-tpl">
-    <!-- this should be <slot></slot> -->
-    <slot />
-    <span>(?)</span>
-  </template>
   <astro-tooltip textToShow="Some important info"></astro-tooltip>
   <astro-tooltip textToShow="Another important info">
     I will occupy the slot
