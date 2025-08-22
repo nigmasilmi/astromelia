@@ -16,10 +16,20 @@ const currentUser = {
 <Layout pageTitle={pageTitle}>
   <h1>{headingTitle}</h1>
   <UserPanel user={currentUser} />
-  <astro-tooltip textToShow="Some important info"></astro-tooltip>
-  <astro-tooltip textToShow="Another important info">
-    I will occupy the slot
-  </astro-tooltip>
+  <div>
+    <h2>Tooltip web component</h2>
+    <astro-tooltip textToShow="Some important info"></astro-tooltip>
+  </div>
+  <div>
+    <h2>Tooltip web component</h2>
+    <astro-tooltip textToShow="Another important info">
+      I will occupy the slot
+    </astro-tooltip>
+  </div>
+  <div>
+    <h2>Confirm link web component</h2>
+    <a is="astro-confirm-link" href="https://google.com">confirm link</a>
+  </div>
 </Layout>
 
 <!-- This is client-side script is different 
@@ -29,3 +39,4 @@ const currentUser = {
 `defer` tells the browser to run it after the HTML is parsed, without blocking page load. -->
 <script src="../../external-script.js" is:inline defer></script>
 <script src="../web-components/Tooltip/Tooltip.js"></script>
+<script src="../web-components/Confirm-link/ConfirmLink.js"></script>
