@@ -3,6 +3,7 @@
 class Tooltip extends HTMLElement {
   constructor() {
     super();
+    this._tooltipContainer;
 
     console.log("executing");
   }
@@ -11,7 +12,22 @@ class Tooltip extends HTMLElement {
   connectedCallback() {
     const tooltipIcon = document.createElement("span");
     tooltipIcon.textContent = " (?) ";
+    // fixing the context to the class instance
+    // and not only the span which triggers the event
+    tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
+    tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
     this.appendChild(tooltipIcon);
+  }
+
+  // underscore as a convention to signal this is a "private" method
+  _showTooltip() {
+    this._tooltipContainer = document.createElement("div");
+    this._tooltipContainer.textContent = "this is the tooltip text";
+    this.appendChild(this._tooltipContainer);
+  }
+
+  _hideTooltip() {
+    this.removeChild(this._tooltipContainer);
   }
 }
 
