@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+// Astro.glob imports all Markdown files in this folder as an array of modules.
+// Each item includes frontmatter, content, and a generated URL,
+// so we can loop over them to build a list of dog breeds.
+const dogBreeds = await Astro.glob("./*.md");
+---
+
+<Layout pageTitle="Dog breeds">
+  <h1>Dog breeds</h1>
+  <nav>
+    <ul>
+      {
+        dogBreeds.map((breed) => (
+          <li>
+            <a href={breed.url}>{breed.frontmatter.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</Layout>
