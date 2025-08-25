@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { catBreeds } from "../shared/catBreedsMock";
+---
+
+<Layout pageTitle="Routing">
+  <div>
+    <h2>Static routing</h2>
+    <h3>Dog breeds</h3>
+    <a href="/dog-breeds">Go</a>
+  </div>
+  <div>
+    <h2>Dynamic routing</h2>
+    <h3>Cat breeds</h3>
+    <nav>
+      <ul>
+        {
+          catBreeds.map((breed) => (
+            <li>
+              <a href={`cat-breeds/${breed.slug}`}>{breed.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</Layout>

@@ -1,0 +1,35 @@
+---
+import Counter from "../components/ReactCounter";
+import VueCounter from "../components/VueCounter.vue";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout pageTitle="Island architecture">
+  <div>
+    <!-- client:load -->
+    <!-- hydrate immediately on page load. 
+     Use for UI that must be interactive right away. -->
+
+    <!-- client:idle -->
+    <!-- hydrate once the main thread is idle. 
+     Good for non-critical UI to avoid blocking initial render. -->
+
+    <!-- client:visible -->
+    <!-- hydrate only when it becomes visible in the viewport. 
+     Ideal for lazy-loading interactive parts further down the page. -->
+
+    <!-- client:media="(condition)" -->
+    <!-- hydrate only if the CSS media query matches. 
+     Example: client:media="(max-width: 600px)" for mobile-only behavior. -->
+
+    <!-- client:only="framework" -->
+    <!-- This ensures the component is rendered only on the client 
+     (not on the server). Use when a library needs full browser APIs. -->
+
+    <h2>Island components</h2>
+    <h3>React component</h3>
+    <Counter count={0} client:load>Placeholder for message</Counter>
+    <h3>Vue component</h3>
+    <VueCounter client:load />
+  </div>
+</Layout>
