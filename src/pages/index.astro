@@ -1,4 +1,6 @@
 ---
+import Counter from "../components/ReactCounter";
+import VueCounter from "../components/VueCounter.vue";
 import UserPanel from "../components/UserPanel.astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -16,6 +18,33 @@ const currentUser = {
 <Layout pageTitle={pageTitle}>
   <h1>{headingTitle}</h1>
   <UserPanel user={currentUser} />
+  <div>
+    <!-- client:load -->
+    <!-- hydrate immediately on page load. 
+     Use for UI that must be interactive right away. -->
+
+    <!-- client:idle -->
+    <!-- hydrate once the main thread is idle. 
+     Good for non-critical UI to avoid blocking initial render. -->
+
+    <!-- client:visible -->
+    <!-- hydrate only when it becomes visible in the viewport. 
+     Ideal for lazy-loading interactive parts further down the page. -->
+
+    <!-- client:media="(condition)" -->
+    <!-- hydrate only if the CSS media query matches. 
+     Example: client:media="(max-width: 600px)" for mobile-only behavior. -->
+
+    <!-- client:only="framework" -->
+    <!-- This ensures the component is rendered only on the client 
+     (not on the server). Use when a library needs full browser APIs. -->
+
+    <h2>Island components</h2>
+    <h3>React component</h3>
+    <Counter count={0} client:load>Placeholder for message</Counter>
+    <h3>Vue component</h3>
+    <VueCounter client:load />
+  </div>
   <div>
     <h2>Tooltip web component</h2>
     <astro-tooltip textToShow="Some important info"></astro-tooltip>
@@ -47,3 +76,19 @@ const currentUser = {
 <script src="../web-components/Tooltip/Tooltip.js"></script>
 <script src="../web-components/Confirm-link/ConfirmLink.js"></script>
 <script src="../web-components/Box-and-button/BoxAndButton.js"></script>
+
+<!-- React Counter component styles -->
+
+<style is:global>
+  .counter {
+    display: grid;
+    font-size: 2em;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 2em;
+    place-items: center;
+  }
+
+  .counter-message {
+    text-align: center;
+  }
+</style>
